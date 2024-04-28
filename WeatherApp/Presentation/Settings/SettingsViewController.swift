@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  SettingsViewController.swift
 //  WeatherApp
 //
 //  Created by arslanali on 28.04.2024.
@@ -7,13 +7,11 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		view.backgroundColor = .red
+        // Do any additional setup after loading the view.
     }
-  
-
 }
