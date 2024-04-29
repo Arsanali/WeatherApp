@@ -17,7 +17,6 @@ final class SearchViewController: UIViewController {
 	
 	private lazy var searchBar: UISearchBar = {
 		let searchBar = UISearchBar()
-		searchBar.delegate = self
 		return searchBar
 	}()
 	
@@ -28,12 +27,11 @@ final class SearchViewController: UIViewController {
 		return tableView
 	}()
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		setupViews()
-		setup()
-		
-    }
+		setupBinding()
+	}
 	
 	private func setupViews() {
 		view.backgroundColor = .white
@@ -54,9 +52,9 @@ final class SearchViewController: UIViewController {
 		}
 	}
 	
-	private func setup() {
+	private func setupBinding() {
 		searchBar.textDidChangePublisher
-			.debounce(for: 0.5, scheduler: DispatchQueue.main)
+			.debounce(for: 0.9, scheduler: DispatchQueue.main)
 			.compactMap { $0 }
 			.sink { [weak self] searchText in
 				self?.searchSity(searchText)
@@ -68,13 +66,11 @@ final class SearchViewController: UIViewController {
 		Task {
 			do {
 				let model = try await searchViewModelImpl.fetchCity(city: city)
-				self.cityModel = [model]
+				self.cityModel.append(model)
 				DispatchQueue.main.async {
 					self.tableView.reloadData()
 				}
-			} catch {
-				print("Error fetching city: \(error)")
-			}
+			} 
 		}
 	}
 }
@@ -90,13 +86,4 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.textLabel?.text = model
 		return cell
 	}
-}
-
-extension SearchViewController: UISearchBarDelegate  {
-	
-//	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//		if let searchText = searchBar.text, !searchText.isEmpty {
-//			searchSity(searchText)
-//		}
-//	}
 }

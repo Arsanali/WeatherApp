@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SearchViewModel {
-	
+	func fetchCity(city: String) async throws -> City
 }
 
 class SearchViewModelImpl: SearchViewModel {
