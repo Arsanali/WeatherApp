@@ -7,11 +7,7 @@
 
 import Foundation
 
-protocol NetworkManager {
-	
-}
-
-class NetworkManagerImpl: NetworkManager  {
+class NetworkManager: NetworkManagerProtocol {
 	
 }
 
