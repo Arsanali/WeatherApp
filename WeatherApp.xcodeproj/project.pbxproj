@@ -61,6 +61,7 @@
 		8628BC742BDFBD0900F1BB55 /* ServiceProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BC732BDFBD0900F1BB55 /* ServiceProviderProtocol.swift */; };
 		8628BC772BDFBD4900F1BB55 /* CitySearchServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BC762BDFBD4900F1BB55 /* CitySearchServiceProtocol.swift */; };
 		8628BC7A2BDFBE1700F1BB55 /* CitySearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BC792BDFBE1700F1BB55 /* CitySearchService.swift */; };
+		8628BC7D2BDFDB3C00F1BB55 /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8628BC7C2BDFDB3C00F1BB55 /* CombineCocoa */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8628BC7D2BDFDB3C00F1BB55 /* CombineCocoa in Frameworks */,
 				8628BC022BDE7F5B00F1BB55 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,6 +438,7 @@
 			name = WeatherApp;
 			packageProductDependencies = (
 				8628BC012BDE7F5B00F1BB55 /* SnapKit */,
+				8628BC7C2BDFDB3C00F1BB55 /* CombineCocoa */,
 			);
 			productName = WeatherApp;
 			productReference = 8628BBE02BDE558800F1BB55 /* WeatherApp.app */;
@@ -467,6 +470,7 @@
 			mainGroup = 8628BBD72BDE558800F1BB55;
 			packageReferences = (
 				8628BC002BDE7F5B00F1BB55 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				8628BC7B2BDFDB3C00F1BB55 /* XCRemoteSwiftPackageReference "CombineCocoa" */,
 			);
 			productRefGroup = 8628BBE12BDE558800F1BB55 /* Products */;
 			projectDirPath = "";
@@ -767,6 +771,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		8628BC7B2BDFDB3C00F1BB55 /* XCRemoteSwiftPackageReference "CombineCocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineCocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -774,6 +786,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8628BC002BDE7F5B00F1BB55 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		8628BC7C2BDFDB3C00F1BB55 /* CombineCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8628BC7B2BDFDB3C00F1BB55 /* XCRemoteSwiftPackageReference "CombineCocoa" */;
+			productName = CombineCocoa;
 		};
 /* End XCSwiftPackageProductDependency section */
 

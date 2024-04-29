@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import Combine
+import CombineCocoa
 
 final class SearchViewController: UIViewController {
 
 	private var searchViewModelImpl = SearchViewModelImpl()
 	private var cityModel: [City] = []
+	private var cancellables: Set<AnyCancellable> = []
 	
 	private lazy var searchBar: UISearchBar = {
 		let searchBar = UISearchBar()
@@ -28,6 +31,7 @@ final class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		setupViews()
+		setup()
 		
     }
 	
@@ -50,12 +54,22 @@ final class SearchViewController: UIViewController {
 		}
 	}
 	
+	private func setup() {
+		searchBar.textDidChangePublisher
+			.debounce(for: 0.5, scheduler: DispatchQueue.main)
+			.compactMap { $0 }
+			.sink { [weak self] searchText in
+				self?.searchSity(searchText)
+			}.store(in: &cancellables)
+		
+	}
+	
 	private func searchSity(_ city: String) {
 		Task {
 			do {
 				let model = try await searchViewModelImpl.fetchCity(city: city)
+				self.cityModel = [model]
 				DispatchQueue.main.async {
-					self.cityModel = [model]
 					self.tableView.reloadData()
 				}
 			} catch {
@@ -79,10 +93,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SearchViewController: UISearchBarDelegate  {
-	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-		if let searchText = searchBar.text, !searchText.isEmpty {
-			searchSity(searchText)
-		}
-		searchBar.resignFirstResponder() // Скрыть клавиатуру после поиска
-	}
+	
+//	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//		if let searchText = searchBar.text, !searchText.isEmpty {
+//			searchSity(searchText)
+//		}
+//	}
 }
