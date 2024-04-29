@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol NetworkManagerProtocol {
-	
+protocol CitySearchManagerProtocol: AnyObject {
+	func getCity(_ city: String) async throws -> City 
 }

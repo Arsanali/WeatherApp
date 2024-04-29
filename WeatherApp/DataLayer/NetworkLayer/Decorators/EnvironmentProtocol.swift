@@ -14,7 +14,7 @@ enum Environment {
 	var base: URL {
 		switch self {
 		case .production:
-			guard let base = URL(string: "api.openweathermap.org/data/2.5/") else {
+			guard let base = URL(string: "http://api.openweathermap.org/data/2.5/") else {
 				fatalError("Базовый URL production недействителен")
 			}
 			return base
