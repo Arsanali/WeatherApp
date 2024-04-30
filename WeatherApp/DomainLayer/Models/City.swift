@@ -30,7 +30,7 @@ struct Clouds: Decodable {
 
 // MARK: - Coord
 struct Coord: Decodable {
-	let lon, lat: Double?
+	let lat, lon: Double?
 }
 
 // MARK: - Main

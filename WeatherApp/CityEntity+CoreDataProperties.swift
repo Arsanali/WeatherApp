@@ -16,6 +16,8 @@ extension CityEntity {
         return NSFetchRequest<CityEntity>(entityName: "CityEntity")
     }
 
+    @NSManaged public var lat: Double
+    @NSManaged public var lon: Double
     @NSManaged public var name: String?
 
 }

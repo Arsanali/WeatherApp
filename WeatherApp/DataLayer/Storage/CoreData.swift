@@ -25,6 +25,8 @@ final class CoreData {
 				if !(self?.cityExists(name: city.name , in: context) ?? true) {
 					let cityEntity = CityEntity(context: context)
 					cityEntity.name = city.name
+					cityEntity.lat = city.coord?.lat ?? 0.0
+					cityEntity.lon = city.coord?.lon ?? 0.0
 					
 					do {
 						try context.save()
@@ -58,6 +60,8 @@ final class CoreData {
 			for city in cityes {
 				let cityEntity = CityEntity(context: context)
 				cityEntity.name = city.name
+				cityEntity.lat = city.coord?.lat ?? 00
+				cityEntity.lon = city.coord?.lon ?? 0
 			}
 			// Save Data
 			do {

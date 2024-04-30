@@ -9,6 +9,7 @@ import UIKit
 
 final class DetailCityViewController: UIViewController {
 	
+	private var viewModel: DetailCityViewModel = DetailCityViewModelImpl()
 	private lazy var nameCityLabel: UILabel = {
 		let label = UILabel()
 		label.font = .systemFont(ofSize: 18)
@@ -48,10 +49,13 @@ final class DetailCityViewController: UIViewController {
 	}
 	
 	func configureView(city: City) {
-		guard let temp = city.main?.temp else { return }
 		nameCityLabel.text = city.name
-		temperatureLabel.text = "\(273.15 - temp)"
 		
+		Task {
+			guard let lat = city.coord?.lat, let lon = city.coord?.lon else { return }
+			let data = try await viewModel.fetchDetailInfoCity(lat, lon)
+			print("Детальная информация запроса,\(data)")
+		}
 	}
 
 }
