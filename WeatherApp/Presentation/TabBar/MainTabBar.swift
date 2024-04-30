@@ -49,7 +49,7 @@ class MainTabBar: UITabBarController {
 			
 			switch $0 {
 			case .main:
-				viewController = MainViewController()
+				viewController = MainViewBuilder.createModule()
 			case .search:
 				viewController = SearchViewController()
 			case .settings:

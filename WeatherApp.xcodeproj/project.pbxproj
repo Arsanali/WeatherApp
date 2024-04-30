@@ -14,7 +14,6 @@
 		8628BBF32BDE558A00F1BB55 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 8628BBF22BDE558A00F1BB55 /* Base */; };
 		8628BBFE2BDE7D8800F1BB55 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BBFD2BDE7D8800F1BB55 /* MainViewController.swift */; };
 		8628BC022BDE7F5B00F1BB55 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8628BC012BDE7F5B00F1BB55 /* SnapKit */; };
-		8628BC0A2BDE81A800F1BB55 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BC092BDE81A800F1BB55 /* StorageManager.swift */; };
 		8628BC0C2BDE81B100F1BB55 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BC0B2BDE81B100F1BB55 /* NetworkManager.swift */; };
 		8628BC152BDE897C00F1BB55 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BC142BDE897C00F1BB55 /* SearchViewController.swift */; };
 		8628BC172BDE8E9B00F1BB55 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BC162BDE8E9B00F1BB55 /* SettingsViewController.swift */; };
@@ -62,6 +61,8 @@
 		8628BC772BDFBD4900F1BB55 /* CitySearchServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BC762BDFBD4900F1BB55 /* CitySearchServiceProtocol.swift */; };
 		8628BC7A2BDFBE1700F1BB55 /* CitySearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BC792BDFBE1700F1BB55 /* CitySearchService.swift */; };
 		8628BC7D2BDFDB3C00F1BB55 /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8628BC7C2BDFDB3C00F1BB55 /* CombineCocoa */; };
+		8628BC7F2BDFF28600F1BB55 /* MainViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BC7E2BDFF28600F1BB55 /* MainViewBuilder.swift */; };
+		8628BC812BDFF87100F1BB55 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8628BC802BDFF87100F1BB55 /* CoreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,7 +74,6 @@
 		8628BBF22BDE558A00F1BB55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8628BBF42BDE558A00F1BB55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8628BBFD2BDE7D8800F1BB55 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		8628BC092BDE81A800F1BB55 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		8628BC0B2BDE81B100F1BB55 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		8628BC142BDE897C00F1BB55 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8628BC162BDE8E9B00F1BB55 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +120,8 @@
 		8628BC732BDFBD0900F1BB55 /* ServiceProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderProtocol.swift; sourceTree = "<group>"; };
 		8628BC762BDFBD4900F1BB55 /* CitySearchServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchServiceProtocol.swift; sourceTree = "<group>"; };
 		8628BC792BDFBE1700F1BB55 /* CitySearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchService.swift; sourceTree = "<group>"; };
+		8628BC7E2BDFF28600F1BB55 /* MainViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewBuilder.swift; sourceTree = "<group>"; };
+		8628BC802BDFF87100F1BB55 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,7 +218,7 @@
 		8628BC072BDE818E00F1BB55 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				8628BC092BDE81A800F1BB55 /* StorageManager.swift */,
+				8628BC802BDFF87100F1BB55 /* CoreData.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -261,6 +263,7 @@
 			children = (
 				8628BBFD2BDE7D8800F1BB55 /* MainViewController.swift */,
 				8628BC1C2BDFAAE600F1BB55 /* MainViewModel.swift */,
+				8628BC7E2BDFF28600F1BB55 /* MainViewBuilder.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -517,8 +520,8 @@
 				8628BC742BDFBD0900F1BB55 /* ServiceProviderProtocol.swift in Sources */,
 				8628BC432BDFADB900F1BB55 /* HTTPHeader.swift in Sources */,
 				8628BC662BDFAF1B00F1BB55 /* ErrorDescriptionProtocol.swift in Sources */,
+				8628BC7F2BDFF28600F1BB55 /* MainViewBuilder.swift in Sources */,
 				8628BC192BDE8EC800F1BB55 /* MainTabBar.swift in Sources */,
-				8628BC0A2BDE81A800F1BB55 /* StorageManager.swift in Sources */,
 				8628BC492BDFADDE00F1BB55 /* ResumebleTask.swift in Sources */,
 				8628BC5B2BDFAEBF00F1BB55 /* SimpleResult.swift in Sources */,
 				8628BC262BDFAC7E00F1BB55 /* NetworkDecorator.swift in Sources */,
@@ -530,6 +533,7 @@
 				8628BC602BDFAEF000F1BB55 /* ValidationError.swift in Sources */,
 				8628BC382BDFAD5600F1BB55 /* Endpointable.swift in Sources */,
 				8628BC282BDFACB700F1BB55 /* NetworkRouter.swift in Sources */,
+				8628BC812BDFF87100F1BB55 /* CoreData.swift in Sources */,
 				8628BBE62BDE558800F1BB55 /* SceneDelegate.swift in Sources */,
 				8628BBFE2BDE7D8800F1BB55 /* MainViewController.swift in Sources */,
 				8628BC412BDFADAD00F1BB55 /* HTTPTask.swift in Sources */,

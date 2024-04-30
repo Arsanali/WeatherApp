@@ -19,7 +19,7 @@ struct City: Decodable {
 	let dt: Int?
 	let sys: Sys?
 	let timezone, id: Int?
-	let name: String?
+	let name: String
 	let cod: Int?
 }
 

@@ -66,11 +66,12 @@ final class SearchViewController: UIViewController {
 		Task {
 			do {
 				let model = try await searchViewModelImpl.fetchCity(city: city)
-				self.cityModel.append(model)
 				DispatchQueue.main.async {
+					self.cityModel.append(model)
+					CoreData.sharedInstance.saveDataOf(cities: [model])
 					self.tableView.reloadData()
 				}
-			} 
+			}
 		}
 	}
 }
