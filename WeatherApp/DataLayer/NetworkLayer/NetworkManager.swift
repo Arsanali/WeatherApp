@@ -48,6 +48,19 @@ private extension NetworkManager {
 }
 
 extension NetworkManager: CitySearchManagerProtocol {
+	func fetchDetailInfoCity(_ lat: Double, lon: Double) async throws -> DetailCityInfo {
+		return try await withCheckedThrowingContinuation { continuation in
+			performRequest(CityEndPoint.detailInfoCity(lat: lat, lon: lon)) { (result: Result<DetailCityInfo, DomainError>) in
+				switch result {
+				case .success(let city):
+					continuation.resume(returning: city)
+				case .failure(let error):
+					continuation.resume(throwing: error)
+				}
+			}
+		}
+	}
+	
 	func getCity(_ city: String) async throws -> City {
 		return try await withCheckedThrowingContinuation { continuation in
 			performRequest(CityEndPoint.searchCity(city: city)) { (result: Result<City, DomainError>) in

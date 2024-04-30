@@ -18,7 +18,6 @@ protocol UpdateTableViewDelegate: NSObjectProtocol {
 	func reloadData(sender: MainViewModelImlp)
 }
 
-
 final class MainViewModelImlp: NSObject, NSFetchedResultsControllerDelegate, MainViewModel {
 	
 	private let container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
@@ -53,7 +52,6 @@ final class MainViewModelImlp: NSObject, NSFetchedResultsControllerDelegate, Mai
 	}
 	
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		// Update the tableView
 		self.delegate?.reloadData(sender: self)
 	}
 	

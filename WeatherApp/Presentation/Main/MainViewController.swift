@@ -88,4 +88,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 		return UISwipeActionsConfiguration(actions: [deleteAction])
 	}
 	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let vc = DetailCityViewController()
+		let model = viewModel.object(indexPath: indexPath)
+		let city = model.map { City(coord: nil, weather: nil, base: nil, main: nil, visibility: nil, wind: nil, clouds: nil, dt: nil, sys: nil, timezone: nil, id: nil, name: $0.name ?? "", cod: nil)}
+		if let city = city {
+			vc.configureView(city: city)
+			navigationController?.pushViewController(vc, animated: true)
+		}
+	}
 }
