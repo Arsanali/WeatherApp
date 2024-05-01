@@ -11,7 +11,7 @@ import CoreData
 
 final class MainViewController: UIViewController, UpdateTableViewDelegate {
 
-	private var viewModel = MainViewModelImlp()
+	private var viewModel: MainViewModel
 	
 	private lazy var tableView: UITableView = {
 		let tableView = UITableView()
@@ -19,12 +19,20 @@ final class MainViewController: UIViewController, UpdateTableViewDelegate {
 		tableView.dataSource = self
 		return tableView
 	}()
-
+	
+	init(viewModel: MainViewModel) {
+		self.viewModel = viewModel
+		super.init(nibName: nil, bundle: nil)
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		setupViews()
 		setupObservers()
-		loadData()
 		self.viewModel.delegate = self
 		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "сell")
     }
@@ -41,18 +49,13 @@ final class MainViewController: UIViewController, UpdateTableViewDelegate {
 		}
 	}
 	
-	@objc private func loadData() {
-		viewModel.retrieveDataFromCoreData()
-	}
-	
-	func reloadData(sender: MainViewModelImlp) {
+	func reloadData(sender: MainViewModel) {
 		self.tableView.reloadData()
 	}
 
 	private func setupObservers() {
 		NotificationCenter.default.addObserver(forName: Notification.Name("SearchViewModelCityUpdated"), object: nil, queue: nil) { [weak self] _ in
 			DispatchQueue.main.async {
-				self?.loadData()
 				self?.tableView.reloadData()
 			}
 		}

@@ -11,7 +11,8 @@ import UIKit
 
 final class MainViewBuilder {
 	static func createModule() -> UIViewController {
-		let vc = MainViewController()
+		let viewModel = MainViewModelImlp()
+		let vc = MainViewController(viewModel: viewModel)
 		return vc
 	}
 }
