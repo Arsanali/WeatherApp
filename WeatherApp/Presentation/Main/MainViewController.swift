@@ -71,8 +71,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "сell", for: indexPath)
 		if let object = viewModel.object(indexPath: indexPath) {
 			cell.textLabel?.text = object.name
-		} else {
-			cell.textLabel?.text = "Unknown"
 		}
 		return cell
 	}
@@ -84,9 +82,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { [weak self] (action, view, completionHandler) in
 			self?.viewModel.deleteCity(indexPath: indexPath)
-			completionHandler(true)
+			DispatchQueue.main.async {
+				tableView.deleteRows(at: [indexPath], with: .automatic)
+				completionHandler(true)
+			}
 		}
-		
 		return UISwipeActionsConfiguration(actions: [deleteAction])
 	}
 	

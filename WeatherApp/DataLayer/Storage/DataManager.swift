@@ -5,7 +5,6 @@
 //  Created by arslanali on 29.04.2024.
 //
 
-import UIKit
 import CoreData
 
 protocol DataManager {
@@ -14,35 +13,41 @@ protocol DataManager {
 	func getNumberOfCities() -> Int
 	func getCity(at indexPath: IndexPath) -> CityEntity?
 	func setupFetchedResultsController()
+	func saveContext()
 }
 
 final class DataManagerImp: DataManager {
 	
-	private var container: NSPersistentContainer? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer
+	// MARK: - Core Data stack
+	
+	lazy var persistentContainer: NSPersistentContainer = {
+		
+		let container = NSPersistentContainer(name: "WeatherApp")
+		container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+			if let error = error as NSError? {
+				
+				fatalError("Unresolved error \(error), \(error.userInfo)")
+			}
+		})
+		return container
+	}()
+	
+
 	private var fetchedResultsController: NSFetchedResultsController<CityEntity>?
 	private var viewContext: NSManagedObjectContext?
 	
 	init() {
-		guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-			fatalError("AppDelegate is not found")
-		}
-		container = appDelegate.persistentContainer
-		viewContext = container?.viewContext
+		viewContext = persistentContainer.viewContext
 		setupFetchedResultsController()
 	}
 	
 	 func setupFetchedResultsController() {
-		guard let viewContext = viewContext else {
-			print("Error: viewContext is nil.")
-			return
-		}
-		
 		let request: NSFetchRequest<CityEntity> = CityEntity.fetchRequest()
 		request.sortDescriptors = [NSSortDescriptor(key: #keyPath(CityEntity.name), ascending: false)]
 		
 		fetchedResultsController = NSFetchedResultsController(
 			fetchRequest: request,
-			managedObjectContext: viewContext,
+			managedObjectContext: persistentContainer.viewContext,
 			sectionNameKeyPath: nil,
 			cacheName: nil
 		)
@@ -53,16 +58,24 @@ final class DataManagerImp: DataManager {
 			print("Failed to initialize FetchedResultsController: \(error)")
 		}
 	}
+		
+	func saveContext() {
+		let context = persistentContainer.viewContext
+		if context.hasChanges {
+			do {
+				try context.save()
+			} catch {
+				let nserror = error as NSError
+				fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+			}
+		}
+	}
 	
 	func saveDataOf(cities: [City]) {
-		guard let viewContext = viewContext else {
-			print("Error: viewContext is nil.")
-			return
-		}
-		
+
 		for city in cities {
-			if !cityExists(name: city.name, in: viewContext) {
-				let cityEntity = CityEntity(context: viewContext)
+			if !cityExists(name: city.name, in: persistentContainer.viewContext) {
+				let cityEntity = CityEntity(context: persistentContainer.viewContext)
 				cityEntity.name = city.name
 				cityEntity.lat = city.coord?.lat ?? 0.0
 				cityEntity.lon = city.coord?.lon ?? 0.0
@@ -70,7 +83,7 @@ final class DataManagerImp: DataManager {
 		}
 		
 		do {
-			try viewContext.save()
+			try persistentContainer.viewContext.save()
 			NotificationCenter.default.post(name: Notification.Name("SearchViewModelCityUpdated"), object: nil)
 		} catch {
 			print("Failed to save context: \(error)")
@@ -91,11 +104,11 @@ final class DataManagerImp: DataManager {
 	}
 	
 	func deleteCity(at indexPath: IndexPath) {
-		guard let cityEntity = fetchedResultsController?.object(at: indexPath), let viewContext = viewContext else { return }
-		viewContext.delete(cityEntity)
+		guard let cityEntity = fetchedResultsController?.object(at: indexPath) else { return }
+		persistentContainer.viewContext.delete(cityEntity)
 		
 		do {
-			try viewContext.save()
+			try persistentContainer.viewContext.save()
 		} catch {
 			print("Failed to save context after deletion: \(error)")
 		}
