@@ -69,6 +69,8 @@
 		863CF6752BE1163800ED1E3A /* Extension+Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863CF6742BE1163800ED1E3A /* Extension+Double.swift */; };
 		863CF6772BE1276E00ED1E3A /* DetailCityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863CF6762BE1276E00ED1E3A /* DetailCityInfo.swift */; };
 		869C2BF52BE12DEF00027FC8 /* DetailCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C2BF42BE12DEF00027FC8 /* DetailCityViewModel.swift */; };
+		869C2BFA2BE2412000027FC8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 869C2BF82BE2412000027FC8 /* Localizable.strings */; };
+		869C2BFC2BE242FD00027FC8 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C2BFB2BE242FD00027FC8 /* WeatherCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,6 +139,9 @@
 		863CF6792BE12B4B00ED1E3A /* WeatherApp 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeatherApp 2.xcdatamodel"; sourceTree = "<group>"; };
 		869C2BF42BE12DEF00027FC8 /* DetailCityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCityViewModel.swift; sourceTree = "<group>"; };
 		869C2BF62BE1310F00027FC8 /* WeatherAppV3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatherAppV3.xcdatamodel; sourceTree = "<group>"; };
+		869C2BF72BE135FA00027FC8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		869C2BF92BE2412000027FC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		869C2BFB2BE242FD00027FC8 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +216,7 @@
 				8628BBF42BDE558A00F1BB55 /* Info.plist */,
 				8628BBF12BDE558A00F1BB55 /* LaunchScreen.storyboard */,
 				8628BBEF2BDE558A00F1BB55 /* Assets.xcassets */,
+				869C2BF82BE2412000027FC8 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -448,6 +454,7 @@
 			children = (
 				863CF66E2BE0FAC100ED1E3A /* DetailCityViewController.swift */,
 				869C2BF42BE12DEF00027FC8 /* DetailCityViewModel.swift */,
+				869C2BFB2BE242FD00027FC8 /* WeatherCell.swift */,
 			);
 			path = DetailCityWeather;
 			sourceTree = "<group>";
@@ -498,6 +505,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 8628BBD72BDE558800F1BB55;
 			packageReferences = (
@@ -519,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8628BBF02BDE558A00F1BB55 /* Assets.xcassets in Resources */,
+				869C2BFA2BE2412000027FC8 /* Localizable.strings in Resources */,
 				8628BBF32BDE558A00F1BB55 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,6 +541,7 @@
 			files = (
 				8628BC0C2BDE81B100F1BB55 /* NetworkManager.swift in Sources */,
 				8628BC452BDFADC600F1BB55 /* EncodeContainer.swift in Sources */,
+				869C2BFC2BE242FD00027FC8 /* WeatherCell.swift in Sources */,
 				8628BC682BDFAF2900F1BB55 /* Error+Utils.swift in Sources */,
 				8628BC232BDFAC5A00F1BB55 /* Optional+Utils.swift in Sources */,
 				8628BC6C2BDFB10F00F1BB55 /* City.swift in Sources */,
@@ -598,8 +608,17 @@
 			isa = PBXVariantGroup;
 			children = (
 				8628BBF22BDE558A00F1BB55 /* Base */,
+				869C2BF72BE135FA00027FC8 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		869C2BF82BE2412000027FC8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				869C2BF92BE2412000027FC8 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -610,6 +629,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -673,6 +693,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

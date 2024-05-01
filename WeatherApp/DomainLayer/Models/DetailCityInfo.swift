@@ -33,16 +33,16 @@ struct Coordinate: Decodable {
 struct ListInfo: Decodable {
 	let dt: Int?
 	let main: MainClass?
-	let weather: [WeatherInfo]?
+	//let weather: [WeatherInfo]?
 	let clouds: Clouds?
 	let wind: Wind?
 	let visibility: Int?
-	let pop: Double?
-	let sys: Sys?
+	//let pop: Double?
+	//let sys: Sys?
 	let dtTxt: String?
 	
 	enum CodingKeys: String, CodingKey {
-		case dt, main, weather, clouds, wind, visibility, pop, sys
+		case dt, main, clouds, wind, visibility
 		case dtTxt = "dt_txt"
 	}
 }
@@ -71,11 +71,6 @@ struct MainClass: Decodable {
 	}
 }
 
-//// MARK: - Sys
-//struct Sys: Decodable {
-//	let pod: Pod?
-//}
-
 enum Pod: String, Codable {
 	case d = "d"
 	case n = "n"
@@ -86,7 +81,6 @@ struct WeatherInfo: Decodable {
 	let id: Int?
 	let main: MainEnum?
 	let description: Description?
-	let icon: Icon?
 }
 
 enum Description: String, Decodable {
@@ -96,12 +90,12 @@ enum Description: String, Decodable {
 	case scatteredClouds = "scattered clouds"
 }
 
-enum Icon: String, Decodable {
-	case the02D = "02d"
-	case the03D = "03d"
-	case the04D = "04d"
-	case the04N = "04n"
-}
+//enum Icon: String, Decodable {
+//	case the02D = "02d"
+//	case the03D = "03d"
+//	case the04D = "04d"
+//	case the04N = "04n"
+//}
 
 enum MainEnum: String, Decodable {
 	case clouds = "Clouds"

@@ -10,16 +10,13 @@ import UIKit
 final class DetailCityViewController: UIViewController {
 	
 	private var viewModel: DetailCityViewModel = DetailCityViewModelImpl()
-	private lazy var nameCityLabel: UILabel = {
-		let label = UILabel()
-		label.font = .systemFont(ofSize: 18)
-		return label
-	}()
+	private var listInfo: [ListInfo] = []
 	
-	private lazy var temperatureLabel: UILabel = {
-		let label = UILabel()
-		label.font = .systemFont(ofSize: 18)
-		return label
+	private lazy var tableView: UITableView = {
+		let tableView = UITableView()
+		tableView.delegate = self
+		tableView.dataSource = self
+		return tableView
 	}()
 
     override func viewDidLoad() {
@@ -30,32 +27,47 @@ final class DetailCityViewController: UIViewController {
 	
 	private func setupViews() {
 		view.backgroundColor = .white
-		view.addSubviews([nameCityLabel, temperatureLabel])
-		
-		
+		view.addSubviews([tableView])
+		tableView.register(WeatherCell.self, forCellReuseIdentifier: "cell")
 	}
 	
 	private func setupLayout() {
-		nameCityLabel.snp.makeConstraints {
-			$0.leading.equalToSuperview().offset(16)
-			$0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+		tableView.snp.makeConstraints {
+			$0.edges.equalToSuperview()
 		}
-		
-		temperatureLabel.snp.makeConstraints {
-			$0.leading.equalToSuperview().offset(16)
-			$0.top.equalTo(nameCityLabel.snp.bottom).offset(10)
-		}
-		
 	}
 	
-	func configureView(city: City) {
-		nameCityLabel.text = city.name
-		
+	func configureView(city: City) {		
 		Task {
 			guard let lat = city.coord?.lat, let lon = city.coord?.lon else { return }
-			let data = try await viewModel.fetchDetailInfoCity(lat, lon)
-			print("Детальная информация запроса,\(data)")
+			Task {
+				do {
+					let data = try await viewModel.fetchDetailInfoCity(lat, lon)
+					DispatchQueue.main.async {
+						self.listInfo = data.list ?? []
+						self.tableView.reloadData()
+					}
+				} catch {
+					print("Error fetching detail city info: \(error)")
+				}
+			}
 		}
 	}
 
+}
+
+extension DetailCityViewController: UITableViewDelegate, UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return listInfo.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WeatherCell else { 
+			return UITableViewCell() }
+		let info = listInfo[indexPath.row]
+		cell.configure(info)
+		return cell
+	}
+	
+	
 }
