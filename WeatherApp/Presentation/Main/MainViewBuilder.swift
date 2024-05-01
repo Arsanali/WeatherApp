@@ -11,7 +11,8 @@ import UIKit
 
 final class MainViewBuilder {
 	static func createModule() -> UIViewController {
-		let viewModel = MainViewModelImlp()
+		let serviceProvider = ServiceProvider()
+		let viewModel = MainViewModelImlp(serviceProvider: serviceProvider)
 		let vc = MainViewController(viewModel: viewModel)
 		return vc
 	}

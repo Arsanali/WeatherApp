@@ -9,7 +9,8 @@ import UIKit
 
 final class SearchBuilder {
 	static func createSearchModule() -> UIViewController {
-		let viewModel = SearchViewModelImpl()
+		let serviceProvider = ServiceProvider()
+		let viewModel = SearchViewModelImpl(serviceProvider: serviceProvider)
 		let view = SearchViewController(viewModel: viewModel)
 		return view
 	}

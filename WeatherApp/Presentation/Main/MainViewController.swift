@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import CoreData
 
 final class MainViewController: UIViewController, UpdateTableViewDelegate {
 
@@ -91,6 +90,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 		return UISwipeActionsConfiguration(actions: [deleteAction])
 	}
 	
+	//TODO: - вынести этот код в Coordinator
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let vc = DetailCityViewController()
 		let model = viewModel.object(indexPath: indexPath)

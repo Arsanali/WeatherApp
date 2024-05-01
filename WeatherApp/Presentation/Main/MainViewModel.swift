@@ -23,8 +23,12 @@ protocol UpdateTableViewDelegate: NSObjectProtocol {
 }
 
 final class MainViewModelImlp: MainViewModel {
-	var serviceProvider = ServiceProvider()
+	var serviceProvider: ServiceProviderProtocol
 	weak var delegate: UpdateTableViewDelegate?
+	
+	init(serviceProvider: ServiceProviderProtocol) {
+		self.serviceProvider = serviceProvider
+	}
 
 	func numberOfRowsInSection(section: Int) -> Int {
 		serviceProvider.dataManager.getNumberOfCities()

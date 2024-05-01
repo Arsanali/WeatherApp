@@ -14,7 +14,11 @@ protocol SearchViewModel {
 
 class SearchViewModelImpl: SearchViewModel {
 	
-	var serviceProvider = ServiceProvider()
+	let serviceProvider: ServiceProviderProtocol
+	
+	init(serviceProvider: ServiceProviderProtocol) {
+		self.serviceProvider = serviceProvider
+	}
 	
 	func fetchCity(city: String) async throws -> City {
 		return try await serviceProvider.serachCityService.getCity(city)
