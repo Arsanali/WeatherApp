@@ -35,7 +35,6 @@ final class WeatherCell: UITableViewCell {
 	
 	func configure(_ listInfo: ListInfo) {
 		guard let temp = listInfo.main?.temp  else { return }
-		let kelvin = temp - 273.15
-		temperatureLabel.text = "\(String(describing: kelvin))"
+		temperatureLabel.text = temp.kelvinToCelsius(temp)
 	}
 }

@@ -9,8 +9,7 @@ import UIKit
 
 final class DetailCityViewController: UIViewController {
 	
-	private var viewModel: DetailCityViewModel = DetailCityViewModelImpl()
-	private var listInfo: [ListInfo] = []
+	private var viewModel: DetailCityViewModel
 	
 	private lazy var tableView: UITableView = {
 		let tableView = UITableView()
@@ -18,11 +17,22 @@ final class DetailCityViewController: UIViewController {
 		tableView.dataSource = self
 		return tableView
 	}()
-
+	
+	init(viewModel: DetailCityViewModel) {
+		self.viewModel = viewModel
+		super.init(nibName: nil, bundle: nil)
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		setupViews()
 		setupLayout()
+		setupBinding()
+		fetchDetailInfoCity()
     }
 	
 	private func setupViews() {
@@ -37,34 +47,28 @@ final class DetailCityViewController: UIViewController {
 		}
 	}
 	
-	func configureView(city: City) {		
-		Task {
-			guard let lat = city.coord?.lat, let lon = city.coord?.lon else { return }
-			Task {
-				do {
-					let data = try await viewModel.fetchDetailInfoCity(lat, lon)
-					DispatchQueue.main.async {
-						self.listInfo = data.list ?? []
-						self.tableView.reloadData()
-					}
-				} catch {
-					print("Error fetching detail city info: \(error)")
-				}
+	func setupBinding() {
+		viewModel.listInfoPublisher.sink { _ in
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
 			}
-		}
+		}.store(in: &viewModel.cancellables)
 	}
-
+	
+	func fetchDetailInfoCity() {
+		self.viewModel.fetchDetailInfoCity()
+	}
 }
 
 extension DetailCityViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return listInfo.count
+		return viewModel.listInfo.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WeatherCell else { 
 			return UITableViewCell() }
-		let info = listInfo[indexPath.row]
+		let info = viewModel.listInfo[indexPath.row]
 		cell.configure(info)
 		return cell
 	}

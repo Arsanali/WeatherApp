@@ -12,8 +12,6 @@ import CombineCocoa
 final class SearchViewController: UIViewController {
 
 	private var viewModel: SearchViewModel
-	private var cityModel: [City] = []
-	private var cancellables: Set<AnyCancellable> = []
 	
 	private lazy var searchBar: UISearchBar = {
 		let searchBar = UISearchBar()
@@ -40,6 +38,7 @@ final class SearchViewController: UIViewController {
 		super.viewDidLoad()
 		setupViews()
 		setupBinding()
+
 	}
 	
 	private func setupViews() {
@@ -66,33 +65,26 @@ final class SearchViewController: UIViewController {
 			.debounce(for: 0.9, scheduler: DispatchQueue.main)
 			.compactMap { $0 }
 			.sink { [weak self] searchText in
-				self?.searchSity(searchText)
-			}.store(in: &cancellables)
+				self?.viewModel.searchSity(searchText)
+			}.store(in: &viewModel.cancellables)
 		
-	}
-	
-	private func searchSity(_ city: String) {
-		Task {
-			do {
-				let model = try await viewModel.fetchCity(city: city)
-				DispatchQueue.main.async {
-					self.cityModel.append(model)
-					self.viewModel.saveData(cities: [model])
-					self.tableView.reloadData()
-				}
+		viewModel.cityModelPublisher.sink { _ in
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
 			}
-		}
+		}.store(in: &viewModel.cancellables)
 	}
+
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return cityModel.count
+		return viewModel.cityModel.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		let model = cityModel[indexPath.row].name
+		let model = viewModel.cityModel[indexPath.row].name
 		cell.textLabel?.text = model
 		return cell
 	}

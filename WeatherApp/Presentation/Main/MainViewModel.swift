@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 import CoreData
 import UIKit
 
@@ -19,7 +18,6 @@ protocol MainViewModel {
 
 protocol UpdateTableViewDelegate: NSObjectProtocol {
 	func reloadData(sender: MainViewModel)
-	
 }
 
 final class MainViewModelImlp: MainViewModel {

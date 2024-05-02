@@ -19,7 +19,8 @@ protocol DataManager {
 final class DataManagerImp: DataManager {
 	
 	// MARK: - Core Data stack
-	
+	private var fetchedResultsController: NSFetchedResultsController<CityEntity>?
+	private var viewContext: NSManagedObjectContext?
 	lazy var persistentContainer: NSPersistentContainer = {
 		
 		let container = NSPersistentContainer(name: "WeatherApp")
@@ -31,10 +32,6 @@ final class DataManagerImp: DataManager {
 		})
 		return container
 	}()
-	
-
-	private var fetchedResultsController: NSFetchedResultsController<CityEntity>?
-	private var viewContext: NSManagedObjectContext?
 	
 	init() {
 		viewContext = persistentContainer.viewContext

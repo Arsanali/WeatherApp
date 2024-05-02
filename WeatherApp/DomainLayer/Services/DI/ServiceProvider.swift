@@ -34,7 +34,7 @@ extension ServiceProvider: ServiceProviderProtocol {
 		return DataManagerImp()
 	}
 	
-	var serachCityService: any CitySearchServiceProtocol {
+	var searchCityService: any CitySearchServiceProtocol {
 		return CitySearchWeatherServiceImp(citySearchManager: networkManager)
 	}
 }

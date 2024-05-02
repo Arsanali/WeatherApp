@@ -92,12 +92,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	//TODO: - вынести этот код в Coordinator
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let vc = DetailCityViewController()
 		let model = viewModel.object(indexPath: indexPath)
-		let city = model.map { City(coord: .init(lat: model?.lat, lon: model?.lon), weather: nil, base: nil, main: nil, visibility: nil, wind: nil, clouds: nil, dt: nil, sys: nil, timezone: nil, id: nil, name: $0.name ?? "", cod: nil)}
-		if let city = city {
-			vc.configureView(city: city)
-			navigationController?.pushViewController(vc, animated: true)
-		}
+		guard let lat = model?.lat, let lon = model?.lon else { return }
+		let view = DetailBuilder.createModule(model: .init(lat: lat, lon: lon))
+		navigationController?.pushViewController(view, animated: true)
 	}
 }

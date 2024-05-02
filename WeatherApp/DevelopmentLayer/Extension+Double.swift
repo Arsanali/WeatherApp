@@ -9,7 +9,9 @@ import Foundation
 
 
 extension Double {
-	func convert(celvin: Double) -> Double {
-		celvin - 273.15
+	func kelvinToCelsius(_ temperatureInKelvin: Double) -> String {
+		let temperatureInCelsius = temperatureInKelvin - 273.15
+		let formattedTemperature = String(format: "%.1f", temperatureInCelsius)
+		return formattedTemperature
 	}
 }

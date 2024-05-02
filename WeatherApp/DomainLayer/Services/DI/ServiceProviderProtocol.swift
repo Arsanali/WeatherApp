@@ -9,6 +9,8 @@ import Foundation
 
 /// Интерфес сервиса провайдера
 protocol ServiceProviderProtocol: AnyObject {
-	var serachCityService: CitySearchServiceProtocol { get }
+	///Сервис для работы с сетью
+	var searchCityService: CitySearchServiceProtocol { get }
+	///Сервис для работы с базой
 	var dataManager: DataManager { get }
 }

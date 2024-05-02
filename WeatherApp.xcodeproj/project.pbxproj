@@ -73,6 +73,7 @@
 		869C2BFC2BE242FD00027FC8 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C2BFB2BE242FD00027FC8 /* WeatherCell.swift */; };
 		869C2C012BE25A5400027FC8 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C2C002BE25A5400027FC8 /* Localized.swift */; };
 		869C2C032BE2626300027FC8 /* SearchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C2C022BE2626300027FC8 /* SearchBuilder.swift */; };
+		869C2C052BE3DC3100027FC8 /* DetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C2C042BE3DC3100027FC8 /* DetailBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,6 +149,7 @@
 		869C2BFF2BE259E800027FC8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		869C2C002BE25A5400027FC8 /* Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
 		869C2C022BE2626300027FC8 /* SearchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuilder.swift; sourceTree = "<group>"; };
+		869C2C042BE3DC3100027FC8 /* DetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -463,6 +465,7 @@
 				863CF66E2BE0FAC100ED1E3A /* DetailCityViewController.swift */,
 				869C2BF42BE12DEF00027FC8 /* DetailCityViewModel.swift */,
 				869C2BFB2BE242FD00027FC8 /* WeatherCell.swift */,
+				869C2C042BE3DC3100027FC8 /* DetailBuilder.swift */,
 			);
 			path = DetailCityWeather;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				8628BC1B2BDFAA9E00F1BB55 /* Extension+Subviews.swift in Sources */,
 				863CF6752BE1163800ED1E3A /* Extension+Double.swift in Sources */,
 				8628BC362BDFAD4A00F1BB55 /* Parserable.swift in Sources */,
+				869C2C052BE3DC3100027FC8 /* DetailBuilder.swift in Sources */,
 				8628BC772BDFBD4900F1BB55 /* CitySearchServiceProtocol.swift in Sources */,
 				8628BC6F2BDFB2B100F1BB55 /* CityEndPoint.swift in Sources */,
 				8628BC562BDFAE3B00F1BB55 /* JSONEncodableParameteEncoder.swift in Sources */,
