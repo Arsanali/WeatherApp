@@ -94,7 +94,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let model = viewModel.object(indexPath: indexPath)
 		guard let lat = model?.lat, let lon = model?.lon else { return }
-		let view = DetailBuilder.createModule(model: .init(lat: lat, lon: lon))
-		navigationController?.pushViewController(view, animated: true)
+		viewModel.didSelectCity(lat: lat, lon: lon)
 	}
 }

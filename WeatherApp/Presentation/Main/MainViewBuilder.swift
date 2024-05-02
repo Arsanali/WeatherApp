@@ -13,7 +13,9 @@ final class MainViewBuilder {
 	static func createModule() -> UIViewController {
 		let serviceProvider = ServiceProvider()
 		let viewModel = MainViewModelImlp(serviceProvider: serviceProvider)
-		let vc = MainViewController(viewModel: viewModel)
-		return vc
+		let view = MainViewController(viewModel: viewModel)
+		let router = MainRouter(transition: view)
+		viewModel.router = router
+		return view
 	}
 }

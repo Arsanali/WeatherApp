@@ -11,15 +11,18 @@ import SceneKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
-	private let serviceProvider = ServiceProvider()
-
+	private var appCoordinator: AppRouter?
+	
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 		guard let windowScene = (scene as? UIWindowScene) else { return }
-		let tabBar = MainTabBar()
 		window = UIWindow(frame: windowScene.coordinateSpace.bounds)
 		window?.windowScene = windowScene
-		window?.rootViewController = tabBar
-		window?.makeKeyAndVisible()
+		
+		if let window = self.window {
+			appCoordinator = AppRouter(window: window)
+			appCoordinator?.start()
+		}
+		
 	}
 
 	func sceneDidDisconnect(_ scene: UIScene) {
@@ -39,6 +42,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	}
 
 	func sceneDidEnterBackground(_ scene: UIScene) {
-		serviceProvider.dataManager.saveContext()
+		appCoordinator?.serviceProvider.dataManager.saveContext()
 	}
 }

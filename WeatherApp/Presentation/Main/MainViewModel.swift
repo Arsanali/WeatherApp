@@ -13,6 +13,7 @@ protocol MainViewModel {
 	func numberOfRowsInSection (section: Int) -> Int
 	func deleteCity(indexPath: IndexPath)
 	func object (indexPath: IndexPath) -> CityEntity?
+	func didSelectCity(lat: Double, lon: Double)
 	var delegate: UpdateTableViewDelegate? { get set }
 }
 
@@ -22,6 +23,7 @@ protocol UpdateTableViewDelegate: NSObjectProtocol {
 
 final class MainViewModelImlp: MainViewModel {
 	var serviceProvider: ServiceProviderProtocol
+	var router: MainRouterInput? 
 	weak var delegate: UpdateTableViewDelegate?
 	
 	init(serviceProvider: ServiceProviderProtocol) {
@@ -43,5 +45,9 @@ final class MainViewModelImlp: MainViewModel {
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		self.delegate?.reloadData(sender: self)
 	}
-
+	
+	func didSelectCity(lat: Double, lon: Double) {
+		guard let router = router else { return }
+		router.openDetailView(lat: lat, lon: lon)
+	}
 }
