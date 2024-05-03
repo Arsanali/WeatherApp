@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  WeatherApp
+
+  Created by arslanali on 01.05.2024.
+  
+*/
+"search" = "Поиск";
+"main" = "Главная";
+"settings" = "Настройки";
+"weather" = "Погода";
+
