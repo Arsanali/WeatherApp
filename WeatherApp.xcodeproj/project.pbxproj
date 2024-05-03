@@ -485,7 +485,6 @@
 			isa = PBXGroup;
 			children = (
 				869C2C0C2BE3EA4F00027FC8 /* AppRouter */,
-				869C2C072BE3E29900027FC8 /* AppCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -493,6 +492,7 @@
 		869C2C0C2BE3EA4F00027FC8 /* AppRouter */ = {
 			isa = PBXGroup;
 			children = (
+				869C2C072BE3E29900027FC8 /* AppCoordinator.swift */,
 				869C2C0D2BE3EA6500027FC8 /* ModuleTransitionHandler.swift */,
 			);
 			path = AppRouter;
