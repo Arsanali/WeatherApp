@@ -67,11 +67,6 @@ final class NetworkRouter: NetworkRouterProtocol {
 		completion: @escaping (Result<Data, DomainError>) -> Void
 	) -> SessionTask? {
 		do {
-			// Очистить cookie для указанного URL
-			//			if let url = try route.makeRequest(with: environment, cookieStorage: cookieStorage).url {
-			//				HTTPCookieStorage.shared.cookies(for: url)?.forEach { HTTPCookieStorage.shared.deleteCookie($0) }
-			//			}
-			//
 			let  request = try route.makeRequest(with: environment, cookieStorage: cookieStorage)
 			return dataTask(with: request, completion: completion)
 		} catch(let error) {

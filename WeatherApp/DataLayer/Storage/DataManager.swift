@@ -12,7 +12,6 @@ protocol DataManager {
 	func deleteCity(at indexPath: IndexPath)
 	func getNumberOfCities() -> Int
 	func getCity(at indexPath: IndexPath) -> CityEntity?
-	func setupFetchedResultsController()
 	func saveContext()
 }
 
@@ -20,7 +19,6 @@ final class DataManagerImp: DataManager {
 	
 	// MARK: - Core Data stack
 	private var fetchedResultsController: NSFetchedResultsController<CityEntity>?
-	private var viewContext: NSManagedObjectContext?
 	lazy var persistentContainer: NSPersistentContainer = {
 		
 		let container = NSPersistentContainer(name: "WeatherApp")
@@ -34,11 +32,10 @@ final class DataManagerImp: DataManager {
 	}()
 	
 	init() {
-		viewContext = persistentContainer.viewContext
 		setupFetchedResultsController()
 	}
 	
-	 func setupFetchedResultsController() {
+	 private func setupFetchedResultsController() {
 		let request: NSFetchRequest<CityEntity> = CityEntity.fetchRequest()
 		request.sortDescriptors = [NSSortDescriptor(key: #keyPath(CityEntity.name), ascending: false)]
 		

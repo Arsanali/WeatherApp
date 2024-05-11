@@ -21,11 +21,14 @@ protocol UpdateTableViewDelegate: NSObjectProtocol {
 	func reloadData(sender: MainViewModel)
 }
 
-final class MainViewModelImlp: MainViewModel {
+final class MainViewModelImpl: MainViewModel {
+	
+	//MARK: - properties
 	var serviceProvider: ServiceProviderProtocol
 	var router: MainRouterInput? 
 	weak var delegate: UpdateTableViewDelegate?
 	
+	//MARK: - init
 	init(serviceProvider: ServiceProviderProtocol) {
 		self.serviceProvider = serviceProvider
 	}

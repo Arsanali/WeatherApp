@@ -15,6 +15,7 @@ final class DetailCityViewController: UIViewController {
 		let tableView = UITableView()
 		tableView.delegate = self
 		tableView.dataSource = self
+		tableView.register(WeatherCell.self, forCellReuseIdentifier: "cell")
 		return tableView
 	}()
 	
@@ -34,11 +35,10 @@ final class DetailCityViewController: UIViewController {
 		setupBinding()
 		fetchDetailInfoCity()
     }
-	
+
 	private func setupViews() {
 		view.backgroundColor = .white
 		view.addSubviews([tableView])
-		tableView.register(WeatherCell.self, forCellReuseIdentifier: "cell")
 	}
 	
 	private func setupLayout() {
@@ -68,10 +68,17 @@ extension DetailCityViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? WeatherCell else { 
 			return UITableViewCell() }
-		let info = viewModel.listInfo[indexPath.row]
-		cell.configure(info)
 		return cell
 	}
-	
+
+	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		if let weatherCell = cell as? WeatherCell {
+			let info = viewModel.listInfo[indexPath.row]
+			weatherCell.configure(info)
+		}
+	}
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 80
+	}
 	
 }

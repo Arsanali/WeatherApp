@@ -12,13 +12,11 @@ import UIKit
 private enum TabBarItem: Int, CaseIterable {
 	case main
 	case search
-	case settings
 	
 	var iconName: String {
 		switch self {
 		case .main: return "main"
 		case .search: return "search"
-		case .settings: return "settings"
 		}
 	}
 	
@@ -26,7 +24,6 @@ private enum TabBarItem: Int, CaseIterable {
 		switch self {
 		case .main: return "main".localized()
 		case .search: return "search".localized()
-		case .settings: return "settings".localized()
 		}
 	}
 }
@@ -52,8 +49,6 @@ class MainTabBar: UITabBarController {
 				viewController = MainViewBuilder.createModule()
 			case .search:
 				viewController = SearchBuilder.createSearchModule()
-			case .settings:
-				viewController = SettingsViewController()
 			}
 			viewController.title = $0.title
 			viewController.configure(title: $0.title)

@@ -30,11 +30,11 @@ final class ServiceProvider {
 }
 
 extension ServiceProvider: ServiceProviderProtocol {
-	var dataManager: any DataManager {
+	var dataManager: DataManager {
 		return DataManagerImp()
 	}
 	
-	var searchCityService: any CitySearchServiceProtocol {
-		return CitySearchWeatherServiceImp(citySearchManager: networkManager)
+	var searchCityService: CitySearchServiceProtocol {
+		return CitySearchWeatherServiceImp(manager: networkManager)
 	}
 }

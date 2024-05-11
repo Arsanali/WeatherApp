@@ -29,4 +29,3 @@ print("Транспонированная матрица:")
 for row in matrix {
 	print(row)
 }
-
