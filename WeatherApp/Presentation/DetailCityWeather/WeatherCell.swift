@@ -46,13 +46,12 @@ final class WeatherCell: UITableViewCell {
 		}
 		
 		temperatureLabel.snp.makeConstraints {
-			$0.leading.equalTo(titleLabel.snp.trailing).offset(12)
+			$0.leading.equalTo(titleLabel.snp.trailing).offset(4)
 			$0.top.equalToSuperview().offset(12)
 		}
 		
 		dateLabel.snp.makeConstraints {
 			$0.leading.equalToSuperview().offset(12)
-			$0.top.equalTo(temperatureLabel.snp.bottom).offset(4)
 			$0.bottom.equalToSuperview().offset(2)
 		}
 	}

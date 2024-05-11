@@ -8,19 +8,19 @@
 import Foundation
 
 final class CitySearchWeatherServiceImp {
-	private let citySearchManager: CitySearchWeatherManager
+	private let manager: CitySearchWeatherManager
 	
-	init(citySearchManager: CitySearchWeatherManager) {
-		self.citySearchManager = citySearchManager
+	init(manager: CitySearchWeatherManager) {
+		self.manager = manager
 	}
 }
 
 extension CitySearchWeatherServiceImp: CitySearchServiceProtocol {
 	func fetchDetailWeatherCity(_ lat: Double, lon: Double) async throws -> DetailCityInfo {
-		return try await citySearchManager.fetchDetailInfoCity(lat, lon: lon)
+		return try await manager.fetchDetailInfoCity(lat, lon: lon)
 	}
 	
 	func getCity(_ city: String) async throws -> City {
-		return try await citySearchManager.getCity(city)
+		return try await manager.getCity(city)
 	}
 }

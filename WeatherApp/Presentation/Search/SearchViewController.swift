@@ -22,6 +22,7 @@ final class SearchViewController: UIViewController {
 		let tableView = UITableView()
 		tableView.delegate = self
 		tableView.dataSource = self
+		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 		return tableView
 	}()
 	
@@ -44,7 +45,6 @@ final class SearchViewController: UIViewController {
 	private func setupViews() {
 		view.backgroundColor = .white
 		view.addSubviews([searchBar, tableView])
-		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 		
 		searchBar.snp.makeConstraints {
 			$0.top.equalTo(view.safeAreaLayoutGuide)

@@ -16,6 +16,7 @@ final class MainViewController: UIViewController, UpdateTableViewDelegate {
 		let tableView = UITableView()
 		tableView.delegate = self
 		tableView.dataSource = self
+		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "сell")
 		return tableView
 	}()
 	
@@ -33,7 +34,7 @@ final class MainViewController: UIViewController, UpdateTableViewDelegate {
 		setupViews()
 		setupObservers()
 		self.viewModel.delegate = self
-		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "сell")
+		
     }
 	
 	private func setupViews() {
@@ -69,9 +70,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "сell", for: indexPath)
-		if let object = viewModel.object(indexPath: indexPath) {
-			cell.textLabel?.text = object.name
-		}
 		return cell
 	}
 	
@@ -90,10 +88,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 		return UISwipeActionsConfiguration(actions: [deleteAction])
 	}
 	
-	//TODO: - вынести этот код в Coordinator
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let model = viewModel.object(indexPath: indexPath)
 		guard let lat = model?.lat, let lon = model?.lon else { return }
 		viewModel.didSelectCity(lat: lat, lon: lon)
+	}
+	
+	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		if let object = viewModel.object(indexPath: indexPath) {
+			cell.textLabel?.text = object.name
+		}
 	}
 }
